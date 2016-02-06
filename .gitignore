@@ -1,0 +1,6 @@
+/Vagrantfile
+/package.json
+/bower.json
+/.bowerrc
+/config/auth.js
+/config/mongo-db.js
