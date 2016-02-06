@@ -18,29 +18,58 @@ var bcrypt = require('bcrypt-nodejs')
         
         // route to handle registering a new user
         
-        app.post('/newUser', function(req, res, next) {
+        // app.post('/newUser', function(req, res, next) {
             
-            var password = req.body.password;
+        //     var password = req.body.password;
             
-            var newUser = new User({
-                email: req.body.email,
-                password: password,
-                displayName: req.body.displayName
-            });
+        //     var newUser = new User({
+        //         email: req.body.email,
+        //         password: password,
+        //         displayName: req.body.displayName
+        //     });
             
-            newUser.password = newUser.generateHash(password);
+        //     newUser.password = newUser.generateHash(password);
             
                        
-            newUser.save(function(err) {
-                if(err) {
-                    res.send(err);
-                } else {
-                    res.redirect('/');
-             }
+        //     newUser.save(function(err) {
+        //         if(err) {
+        //             res.send(err);
+        //         } else {
+        //             res.redirect('/');
+        //      }
             
-            });
+        //     });
+        // });
+        
+        // LOCAL AUTHENTICATION FOR REGISTERING A NEW USER
+        app.post('/newUser', passport.authenticate('local-register', {
+            successRedirect : '/success',
+            failureRedirect : '/register',
+        }));
+        
+        // LOCAL AUTHENTICATION FOR LOGGING IN
+        app.post('/user/login', passport.authenticate('local-login', {
+            successRedirect : '/success',
+            failureRedirect : '/login',
+        }));
+        
+        // FACEBOOK AUTHENTICATION FOR LOGGING IN
+        
+        // route for facebook authentication and login
+        app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email'}));
+        // deals with the callback after facebook has finished authenticating the user
+        app.get('/auth/facebook/callback', passport.authenticate('facebook', {
+            successRedirect : '/success',
+            failureRedirect : '/login'
+        }));
+        
+        // route for logging out
+        app.get('/logout', function(req, res) {
+            req.logout();
+            res.redirect('/');
         });
         
+        // returns all users in the database
         app.get('/allUsers', function(req, res) {
             User.find(function(err, users) {
                 if (err)
@@ -49,10 +78,10 @@ var bcrypt = require('bcrypt-nodejs')
             });
         });
         
+        // app.get('/success', isLoggedIn, function(req, res) {
+        //     res.render('success.html')
+        // })
         
-        app.get('/user/login', function(req, res, next) {
-            
-        });
         // route to handle deleting users goes in app.delete
         
         // frontend routes =================

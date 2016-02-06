@@ -16,6 +16,11 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
         .when('/login', {
             templateUrl: 'views/login.html',
             controller: 'UserController'
+        })
+        
+        .when('/success', {
+           templateUrl : 'views/success.html',
+           controller: 'UserController'
         });
         
         

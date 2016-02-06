@@ -19,7 +19,7 @@ var db  = require('./config/mongo-db');
 
 mongoose.connect(db.url);
 
-// require(./app/config/passport)(passport);
+require('./config/passport')(passport);
 
 // get all data from the POST body parameters
 app.use(bodyParser.json());

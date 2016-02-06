@@ -5,16 +5,16 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-8 centered">
-                <form action="/user/login" method="POST">
+                <form action="/user/login" method="POST" name="loginForm">
                     <fieldset class="form-group">
                         <label for="email">Email:</label>
-                        <input type="email" class="form-control" id="email" name="username" placeholder="dubs@uw.edu">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="dubs@uw.edu" required>
                     </fieldset>
                     <fieldset class="form-group">
                         <label for="password">Password:</label>
-                        <input type="password" class="form-control" id="password" name="password">
+                        <input type="password" class="form-control" id="password" name="password" required>
                     </fieldset>
-                    <button type="submit" class="btn btn-success" id="loginButton">Login</button>
+                    <button type="submit" class="btn btn-success" id="loginButton" ng-disabled="loginForm.$invalid">Login</button>
                 </form>
             </div>
             <div class="col-sm-4 centered">
