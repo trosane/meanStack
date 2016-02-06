@@ -1,0 +1,30 @@
+<div class="jumbotron text-center">
+    <h1>Register!!</h1>
+    <p>{{ tagline }}</p>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8">
+                <form action="/newUser" method="POST">
+                    <fieldset class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="dubs@uw.edu">
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" class="form-control" id="password" name="password">
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label for="password-confirmation">Confirm Password:</label>
+                        <input type="password" class="form-control" id="password-confirmation" name="passwordConfirmation">
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label for="display-name">Display Name:</label>
+                        <input type="text" class="form-control" id="display-name" name="displayName" placeholder="dawgpack123">
+                    </fieldset>
+                    <button type="submit" class="btn btn-success" id="registerButton">Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
