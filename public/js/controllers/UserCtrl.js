@@ -1,6 +1,6 @@
 angular.module('UserCtrl', []).controller('UserController', function($scope, $http) {
    $scope.tagline = 'You\'re almost there!'; 
-   $scope.email = '';
+   $scope.info = {name: ''};
    
    $scope.getAll = function() {
        $http.get('/allUsers')
@@ -22,15 +22,23 @@ angular.module('UserCtrl', []).controller('UserController', function($scope, $ht
     });
    }
    
-   $scope.grabData = function () {
-       $scope.email = this.formEmail;
-   }
-   
    $http.get('/getData')
     .then(function(results) {
-        $scope.user = results.data;
-        console.log(results.data);
+        var schemaType = Object.keys(results.data)[2];
+        if (schemaType == 'local') {
+            $scope.user = results.data.local
+        } else {
+            $scope.user = results.data.facebook;
+        }
+        $scope.user_id = results.data._id
+        console.log($scope.user);
     })
     
+    $scope.changeName = function() {
+        $http.put('/oneUser/' + $scope.user_id)
+        .then(function(results) {
+            console.log(results);
+        })
+    }
 
 });

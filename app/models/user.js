@@ -7,14 +7,14 @@ var UserSchema = mongoose.Schema ({
     local : {
         email : String,
         password : String,
-        plainPass : String,
-        displayName : String
+        name : String
     },
     facebook : {
         id : String,
         token : String,
         email : String,
-        name : String
+        name : String,
+        hometown : String
     }
 
 });
@@ -28,5 +28,9 @@ UserSchema.methods.generateHash = function(password) {
 UserSchema.methods.validPassword = function(password) {
     return bcrypt.compareSync(password, this.local.password);  
 };
+
+UserSchema.methods.changeName = function(name) {
+    this.local.name = name;
+}
 
 module.exports = mongoose.model('User', UserSchema);

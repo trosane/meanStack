@@ -23,9 +23,9 @@ angular.module('appRoutes', ['ui.router']).config(function($stateProvider, $urlR
             controller: 'UserController'
         })
         
-        .state('success', {
-           url: '/success',
-           templateUrl : 'views/success.html',
+        .state('homepage', {
+           url: '/homepage',
+           templateUrl : 'views/homepage.html',
            controller: 'UserController'
         })
         

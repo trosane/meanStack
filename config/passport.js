@@ -42,8 +42,7 @@ module.exports = function(passport) {
                     
                     newUser.local.email = email;
                     newUser.local.password = newUser.generateHash(password);
-                    newUser.local.plainPass = req.body.passwordConfirmation;
-                    newUser.local.displayName = req.body.displayName;
+                    newUser.local.name = req.body.name;
                     
                     
                     newUser.save(function(err) {
@@ -88,28 +87,27 @@ module.exports = function(passport) {
         clientID : configAuth.facebookAuth.clientID,
         clientSecret : configAuth.facebookAuth.clientSecret,
         callbackURL : configAuth.facebookAuth.callbackURL,
-        profileFields : ['gender']        
+        profileFields : ['id', 'name', 'hometown', 'email']        
     },
     
     // facebook will send back a token and profile
     function(token, refreshToken, profile, done) {
-        console.log('hey');
         process.nextTick(function() {
-            User.findOne({ 'email' : profile._json.email }, function(err, user) {
+            User.findOne({ 'facebook.id' : profile.id}, function(err, user) {
                 if(err)
                     return done(err);
                 // log in a user if they are found
                 if(user) {
                     return done(null, user); //return the found user
                 } else {
-                    var newUser = newUser();
+                    var newUser = new User();
                     
                     newUser.facebook.id = profile.id; // set users facebook id
                     newUser.facebook.token = token; // save the facebook token given to user
                     // save name information
                     newUser.facebook.name = profile.name.givenName + ' ' + profile.name.familyName;
                     // take the first email value of facebook user
-                    newUser.facebook.email = profile.emails[0].value;
+                    newUser.facebook.email = profile.emails[0].value || null;
                     
                     newUser.save(function(err) {
                         if(err)

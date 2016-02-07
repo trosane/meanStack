@@ -7,13 +7,13 @@ var bcrypt = require('bcrypt-nodejs')
         
         // LOCAL AUTHENTICATION FOR REGISTERING A NEW USER
         app.post('/newUser', passport.authenticate('local-register', {
-            successRedirect : '/success',
+            successRedirect : '/success#/homepage',
             failureRedirect : '/register',
         }));
         
         // LOCAL AUTHENTICATION FOR LOGGING IN
         app.post('/user/login', passport.authenticate('local-login', {
-            successRedirect : '/success',
+            successRedirect : '/success#/homepage',
             failureRedirect : '/login',
         }));
         
@@ -23,7 +23,7 @@ var bcrypt = require('bcrypt-nodejs')
         app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email'}));
         // deals with the callback after facebook has finished authenticating the user
         app.get('/auth/facebook/callback', passport.authenticate('facebook', {
-            successRedirect : '/success',
+            successRedirect : '/success#/homepage',
             failureRedirect : '/login'
         }));
         
@@ -41,26 +41,48 @@ var bcrypt = require('bcrypt-nodejs')
             res.redirect('/');
         });
         
-        // returns all users in the database
-        app.get('/allUsers', function(req, res) {
-            User.find(function(err, users) {
-                if (err)
-                    res.send(err);
-                res.json(users);
-            });
-        });
+        //===================================
+        // USER ROUTES
+        //===================================
         
-        app.get('/oneUser' , function(req, res) {
-            User.findOne({ 'local.email' : 'yolo@yolo.com' }, function(err, user) {
-                if (err)
-                    res.send(err);
-                res.json(user);
+            // returns all users in the database
+            app.get('/allUsers', function(req, res) {
+                User.find(function(err, users) {
+                    if (err)
+                        res.send(err);
+                    res.json(users);
+                });
             });
-        });
+            
+            // returns a user by their id
+            app.get('/oneUser/:user_id' , function(req, res) {
+                console.log(req.user);
+                User.findById(req.params.user_id, function(err, user) {
+                    if (err)
+                        res.send(err);
+                    res.json(user);
+                });
+            });
+            
+            // updates a user with this id
+            app.put('/oneUser/:user_id', function(req, res) {
+                console.log(req.body.info);
+                User.findById(req.params.user_id, function(err, user) {
+                    if (err)
+                        res.send(err);
+                        
+                    user.local.name = req.;
+                    
+                    user.save(function(err) {
+                        if (err)
+                            res.send(err);
+                            
+                        res.json({ message: 'User updated'});
+                    });
+                });
+            });
         
-        app.put('/change', function(req, res) {
-            User.auth("local")    
-        });
+        
         
         app.get('/getData', function(req, res) {
             res.json(req.user); 

@@ -43,7 +43,7 @@ app.use(express.static(__dirname + '/public'));
 
 require('./app/routes')(app, passport); // configure routes
 
-app.use(express.static(__dirname + '/secure'));
+// app.use(express.static(__dirname + '/secure'));
 
 app.listen(80, function() {
     console.log('server is running on port 80...');
