@@ -8,11 +8,11 @@
                 <form action="/user/login" method="POST" name="loginForm">
                     <fieldset class="form-group">
                         <label for="email">Email:</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="dubs@uw.edu" required>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="dubs@uw.edu" ng-model="formData.email">
                     </fieldset>
                     <fieldset class="form-group">
                         <label for="password">Password:</label>
-                        <input type="password" class="form-control" id="password" name="password" required>
+                        <input type="password" class="form-control" id="password" name="password" ng-model="formData.password">
                     </fieldset>
                     <button type="submit" class="btn btn-success" id="loginButton" ng-disabled="loginForm.$invalid">Login</button>
                 </form>

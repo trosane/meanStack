@@ -41,6 +41,7 @@ module.exports = function(passport) {
                     
                     newUser.local.email = email;
                     newUser.local.password = newUser.generateHash(password);
+                    newUser.local.displayName = user.displayName;
                     
                     
                     newUser.save(function(err) {
@@ -84,13 +85,15 @@ module.exports = function(passport) {
     passport.use(new FacebookStrategy({
         clientID : configAuth.facebookAuth.clientID,
         clientSecret : configAuth.facebookAuth.clientSecret,
-        callbackURL : configAuth.facebookAuth.callbackURL        
+        callbackURL : configAuth.facebookAuth.callbackURL,
+        profileFields : ['gender']        
     },
     
     // facebook will send back a token and profile
     function(token, refreshToken, profile, done) {
+        console.log('hey');
         process.nextTick(function() {
-            User.findOne({ 'facebook.id' : profile.id }, function(err, user) {
+            User.findOne({ 'email' : profile._json.email }, function(err, user) {
                 if(err)
                     return done(err);
                 // log in a user if they are found

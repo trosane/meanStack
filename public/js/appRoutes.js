@@ -1,29 +1,35 @@
-angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+angular.module('appRoutes', ['ui.router']).config(function($stateProvider, $urlRouterProvider) {
     
-    $routeProvider
+    $urlRouterProvider.otherwise('/home');
+    
+    $stateProvider
         //home page
-        .when('/', {
+        .state('home', {
+            url: '/home',
             templateUrl: 'views/home.html',
             controller: 'MainController'
         })
         
         // user page that will use the UserController
-        .when('/register', {
+        .state('register', {
+            url: '/register',
             templateUrl: 'views/register.html',
             controller: 'UserController' 
         })
         
-        .when('/login', {
+        .state('login', {
+            url: '/login',
             templateUrl: 'views/login.html',
             controller: 'UserController'
         })
         
-        .when('/success', {
+        .state('success', {
+           url: '/success',
            templateUrl : 'views/success.html',
            controller: 'UserController'
         });
         
         
-        $locationProvider.html5Mode(true);
+         // $locationProvider.html5Mode(true);
     
-}]);
+});

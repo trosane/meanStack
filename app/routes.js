@@ -27,6 +27,14 @@ var bcrypt = require('bcrypt-nodejs')
             failureRedirect : '/login'
         }));
         
+        // app.get('/login', function(req, res) {
+        //     res.sendfile('./public/views/login.html');
+        // });
+        
+        // app.get('/register', function(req, res) {
+        //      res.sendfile('./public/views/register.html');
+        //  })
+        
         // route for logging out
         app.get('/logout', function(req, res) {
             req.logout();
@@ -41,6 +49,14 @@ var bcrypt = require('bcrypt-nodejs')
                 res.json(users);
             });
         });
+        
+        app.get('/oneUser' ,function(req, res) {
+            User.findOne({ 'local.email' : 'yolo@yolo.com' }, function(err, user) {
+                if (err)
+                    res.send(err);
+                res.json(user);
+            })
+        })
         
         // app.get('/success', isLoggedIn, function(req, res) {
         //     res.render('success.html')

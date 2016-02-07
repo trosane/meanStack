@@ -11,10 +11,11 @@
     <link rel="stylesheet" href="css/main.css">
     
     <!-- JS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.1/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-route.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.1/moment.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-resource.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.1/angular.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-route.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.1/moment.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-resource.js"></script>
     
     <!-- ANGULAR CUSTOM -->
     <script src="js/controllers/MainCtrl.js"></script>
@@ -29,21 +30,21 @@
     <!-- HEADER -->
     <nav class="navbar navbar-inverse">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/">Aw-thin-ti-c8</a>
+            <a class="navbar-brand" ui-sref="home">Aw-thin-ti-c8</a>
         </div>
         
         <!-- LINK TO OUR PAGES. ANGULAR HANDLES THE ROUTING HERE -->
         <ul class="nav navbar-nav">
-            <li><a href="/register">Register New User</a></li>
+            <li><a ui-sref="register">Register New User</a></li>
         </ul>
         
         <ul class="nav navbar-nav">
-            <li><a href="/login">Login</a></li>
+            <li><a ui-sref="login">Login</a></li>
         </ul>
     </nav>
     
     <!-- ANGULAR DYNAMIC CONTENT -->
-    <div ng-view></div>
+    <div ui-view></div>
     
 </div>
 
