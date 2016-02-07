@@ -1,7 +1,28 @@
 <div class="jumbotron text-center">
-    <h1>{{ user.local.displayName }}'s Profile Page</h1>
-    <p>Email: {{ user.local.email}}</p>
-    <button ng-click="changeEmail()">Get user!</button>
-    <p>Password: {{user.local.plainPass}}</p>
-    <button ng-click="changePass()">Get user!</button>
+    <div class="container">
+        <div class="col-sm-12 centered">
+            <h1>{{ user.local.displayName }}'s Profile Page</h1>
+            <form action="/user/changeName" method="POST" name="nameChangeForm">
+                <fieldset class="form-group">
+                    <label for="name">New Display Name</label>
+                    <input type="text" class="form-control" id="name" name="name" ng-model="newName">
+                </fieldset>
+                <button type="submit" class="btn btn-success" id="nameChangeButton">Change</button>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="col-sm-6 centered">
+            <p>Email: {{ user.local.email}}</p>
+        </div>
+            <div class="col-sm-6 centered">
+                <p>Password: {{user.local.plainPass}}</p>
+                <form action="/user/changePass" method="POST" name="passChangeForm">
+                    <fieldset class="form-group">
+                        <label for="password">New Password</label>
+                        <input type="password" class="form-control" id="password" name="password" ng-model="newPass">
+                    </fieldset>
+                    <button type="submit" class="btn btn-success" id="nameChangeButton">Change</button>
+            </div>
+    </div>
 </div>

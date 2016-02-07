@@ -19,7 +19,7 @@ module.exports = function(passport) {
     });
     
     // =========================
-    //REGISTER PASSPORT
+    // REGISTER PASSPORT
     // =========================
     
     passport.use('local-register', new LocalStrategy({

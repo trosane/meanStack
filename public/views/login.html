@@ -4,7 +4,7 @@
     
     <div class="container">
         <div class="row">
-            <div class="col-sm-8 centered">
+            <div class="col-sm-6 col-sm-offset-3 centered">
                 <form action="/user/login" method="POST" name="loginForm">
                     <fieldset class="form-group">
                         <label for="email">Email:</label>
@@ -17,7 +17,9 @@
                     <button type="submit" class="btn btn-success" id="loginButton" ng-disabled="loginForm.$invalid">Login</button>
                 </form>
             </div>
-            <div class="col-sm-4 centered">
+        </div>
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3 centered">
                 <a href="/auth/facebook" class="btn btn-primary"><span class="fa fa-facebook">Log in with Facebook</a>
             </div>
         </div>

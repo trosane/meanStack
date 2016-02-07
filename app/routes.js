@@ -50,13 +50,17 @@ var bcrypt = require('bcrypt-nodejs')
             });
         });
         
-        app.get('/oneUser' ,function(req, res) {
+        app.get('/oneUser' , function(req, res) {
             User.findOne({ 'local.email' : 'yolo@yolo.com' }, function(err, user) {
                 if (err)
                     res.send(err);
                 res.json(user);
-            })
-        })
+            });
+        });
+        
+        app.put('/change', function(req, res) {
+            User.auth("local")    
+        });
         
         app.get('/getData', function(req, res) {
             res.json(req.user); 
