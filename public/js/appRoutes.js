@@ -27,7 +27,13 @@ angular.module('appRoutes', ['ui.router']).config(function($stateProvider, $urlR
            url: '/success',
            templateUrl : 'views/success.html',
            controller: 'UserController'
-        });
+        })
+        
+        .state('profile', {
+            url:'/profile',
+            templateUrl : 'views/profile.html',
+            controller : 'UserController'
+        })
         
         
          // $locationProvider.html5Mode(true);

@@ -58,6 +58,10 @@ var bcrypt = require('bcrypt-nodejs')
             })
         })
         
+        app.get('/getData', function(req, res) {
+            res.json(req.user); 
+        })
+        
         // app.get('/success', isLoggedIn, function(req, res) {
         //     res.render('success.html')
         // })

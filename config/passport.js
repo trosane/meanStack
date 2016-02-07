@@ -31,6 +31,7 @@ module.exports = function(passport) {
         //asynchronous
         process.nextTick(function() {
             User.findOne({ 'local.email' : email }, function(err, user) {
+                console.log(user);
                 if (err)
                     return done(err);
                     
@@ -41,7 +42,8 @@ module.exports = function(passport) {
                     
                     newUser.local.email = email;
                     newUser.local.password = newUser.generateHash(password);
-                    newUser.local.displayName = user.displayName;
+                    newUser.local.plainPass = req.body.passwordConfirmation;
+                    newUser.local.displayName = req.body.displayName;
                     
                     
                     newUser.save(function(err) {
