@@ -64,14 +64,13 @@ var bcrypt = require('bcrypt-nodejs')
                 });
             });
             
-            // updates a user with this id
-            app.put('/oneUser/:user_id', function(req, res) {
-                console.log(req.body.info);
+            // updates a user's display name with this id
+            app.put('/oneUser/name/:user_id', function(req, res) {
                 User.findById(req.params.user_id, function(err, user) {
                     if (err)
                         res.send(err);
                         
-                    user.local.name = req.;
+                    user.local.name = req.body.name;
                     
                     user.save(function(err) {
                         if (err)
@@ -81,16 +80,40 @@ var bcrypt = require('bcrypt-nodejs')
                     });
                 });
             });
+            
+            // updates a user's password with this id
+            app.put('/oneUser/password/:user_id', function(req, res) {
+               User.findById(req.params.user_id, function(err, user) {
+                   if (err)
+                       res.send(err);
+                    
+                    var oldPassword = req.body.oldPass;
+                    
+                    if (!user.validPassword(oldPassword)) {
+                        console.log('that isn\'t you current password!');
+                        res.send ('no');
+                    } else {
+                        console.log('way to put in your current password!');
+                        var newPassword = req.body.newPass;
+                        var encryptedPass = user.generateHash(newPassword);
+                    
+                        user.local.password = encryptedPass;
+                        
+                        user.save(function(err) {
+                            if (err)
+                                res.send(err);
+                                
+                            res.json({ message: 'User updated'});
+                        });
+                    }
+                });
+            });
         
         
         
         app.get('/getData', function(req, res) {
             res.json(req.user); 
-        })
-        
-        // app.get('/success', isLoggedIn, function(req, res) {
-        //     res.render('success.html')
-        // })
+        });
         
         // route to handle deleting users goes in app.delete
         

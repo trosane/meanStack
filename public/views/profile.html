@@ -5,28 +5,42 @@
             <form ng-submit="changeName()">
                 <fieldset class="form-group">
                     <label for="name">New Display Name</label>
-                    <input type="text" class="form-control" id="newName" name="newName" ng-model="info.name">
+                    <input type="text" class="form-control" id="newName" name="newName" ng-model="infoName.name">
                 </fieldset>
                 <button type="submit" class="btn btn-success" id="nameChangeButton">Change</button>
             </form>
             
-            {{info}}
         </div>
     </div>
     
     <div class="container">
         <div class="col-sm-6 centered">
-            <p>Email: {{user.email}}</p>
+            <p>Email: {{ user.email }}</p>
             <a class="btn btn-info" ui-sref="homepage">Go to Homepage</a>
         </div>
             <div class="col-sm-6 centered">
-                <form action="/user/changePass" method="POST" name="passChangeForm">
+                <div ng-show="error" class="alert alert-danger fade in">
+                    That isn't your current password! Please make sure to type your password correctly.
+                </div>
+                <div ng-show="success" class="alert alert-success fade in">
+                    Password changed successfully!
+                </div>
+                <form ng-submit="changePass()">
+                    <fieldset class="form-group">
+                        <label for="password">Current Password</label>
+                        <input type="password" class="form-control" id="oldPassword" name="oldPassword" ng-model="infoPass.oldPass">
+                    </fieldset>
                     <fieldset class="form-group">
                         <label for="password">New Password</label>
-                        <input type="password" class="form-control" id="password" name="password" ng-model="newPass">
+                        <input type="password" class="form-control" id="newPassword" name="newPassword" ng-model="infoPass.newPass">
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label for="password">Confirm New Password</label>
+                        <input type="password" class="form-control" id="newPasswordConf" name="newPasswordConf">
                     </fieldset>
                     <button type="submit" class="btn btn-success" id="nameChangeButton">Change</button>
                 </form>
+                {{infoPass}}
             </div>
     </div>
 </div>

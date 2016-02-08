@@ -1,6 +1,9 @@
 angular.module('UserCtrl', []).controller('UserController', function($scope, $http) {
    $scope.tagline = 'You\'re almost there!'; 
-   $scope.info = {name: ''};
+   $scope.infoName = {name: ''};
+   $scope.infoPass = {oldPass: '', newPass: ''};
+   $scope.error = false;
+   $scope.success = false;
    
    $scope.getAll = function() {
        $http.get('/allUsers')
@@ -13,7 +16,7 @@ angular.module('UserCtrl', []).controller('UserController', function($scope, $ht
    }
    
    $scope.getOne = function() {
-       $http.get('/oneUser')
+       $http.get('/oneUser' + $scope.user_id)
     .success(function(data) {
         $scope.success = data;
     })
@@ -35,10 +38,22 @@ angular.module('UserCtrl', []).controller('UserController', function($scope, $ht
     })
     
     $scope.changeName = function() {
-        $http.put('/oneUser/' + $scope.user_id)
+        $http.put('/oneUser/name/' + $scope.user_id, $scope.infoName)
         .then(function(results) {
             console.log(results);
-        })
-    }
+        });
+    };
+    
+    $scope.changePass = function() {
+        $http.put('/oneUser/password/' + $scope.user_id, $scope.infoPass)
+        .then(function(results) {
+            if(results.data == 'no') {
+                $scope.error = true;
+            } else {
+                $scope.error = false;
+                $scope.success = true;
+            }
+        });
+    };
 
 });
