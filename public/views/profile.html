@@ -1,6 +1,6 @@
 <div class="jumbotron text-center">
     <div class="container">
-        <div class="col-sm-12 centered">
+        <div class="col-sm-6 centered">
             <h1>{{ user.name }}'s Profile Page</h1>
             <form ng-submit="changeName()">
                 <fieldset class="form-group">
@@ -15,7 +15,7 @@
     
     <div class="container">
         <div class="col-sm-6 centered">
-            <p>Email: {{ user.user.email }}</p>
+            <p>Email: {{ user.email }}</p>
             <a class="btn btn-info" ui-sref="homepage">Go to Homepage</a>
         </div>
             <div class="col-sm-6 centered">
@@ -43,8 +43,7 @@
                     </fieldset>
                     <button type="submit" class="btn btn-success" id="nameChangeButton">Change</button>
                 </form>
-                {{infoPass}}
-                <button ng-click="test()">Test</button>
+                {{ infoPass }}
             </div>
     </div>
 </div>

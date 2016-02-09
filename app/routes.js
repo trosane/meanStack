@@ -120,18 +120,4 @@ var bcrypt = require('bcrypt-nodejs')
             res.sendfile('./public/views/index.html');
         });
         
-        // app.get('/homepage', isLoggedIn, function(req, res, next) {
-        //     return next();
-        // });
-        
-        // //route middleware to ensure a user is logged in
-        // function isLoggedIn(req, res, next) {
-        //     if(req.user) {
-        //         next(); //if logged in, keep going
-        //     } else {
-        //         // if they are not, redirect them to the home page
-        // res.redirect('/');
-        //     }
-        // };
-        
     };

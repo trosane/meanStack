@@ -54,6 +54,8 @@ angular.module('UserCtrl', []).controller('UserController', function($scope, $ht
         });
    };
    
+
+   
    //    $scope.getAll = function() {
 //        $http.get('/allUsers')
 //     .success(function(data) {

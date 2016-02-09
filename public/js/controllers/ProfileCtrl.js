@@ -2,6 +2,9 @@ angular.module('ProfileCtrl', []).controller('ProfileController', function($scop
    
     $scope.user = $cookies.getObject('user');
     $scope.user_id = $cookies.get('id');
+    // $scope.watch('gravEmail', function() {
+    //     $scope.message = 'Your email Hash is: ' + md5.createHash($scope.gravEmail || '');
+    // })
     
    $scope.infoName = {name: ''};
    $scope.infoPass = {oldPass: '', newPass: '', newPassConf: ''};
