@@ -17,12 +17,14 @@ angular.module('appRoutes', ['ui.router']).config(function($stateProvider, $urlR
             controller: 'UserController' 
         })
         
+        // login page
         .state('login', {
             url: '/login',
             templateUrl: 'views/login.html',
             controller: 'UserController'
         })
         
+        // homepage after logging in
         .state('homepage', {
            url: '/homepage',
            templateUrl : 'views/homepage.html',
@@ -30,6 +32,7 @@ angular.module('appRoutes', ['ui.router']).config(function($stateProvider, $urlR
            params: {'user' : null, 'id' : null}
         })
         
+        // profile page after loggin in
         .state('profile', {
             url:'/profile',
             templateUrl : 'views/profile.html',

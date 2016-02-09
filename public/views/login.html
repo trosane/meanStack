@@ -5,7 +5,9 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-6 col-sm-offset-3 centered">
-                <!--<form action="/user/login" method="POST" name="loginForm">-->
+                <div ng-show="loginFailure" class="alert alert-danger fade in">
+                    Username or password is incorrect. Please try again.
+                </div>
                 <form ng-submit="login()">
                     <fieldset class="form-group">
                         <label for="email">Email:</label>

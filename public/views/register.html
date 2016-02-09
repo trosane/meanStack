@@ -5,22 +5,28 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-6 col-sm-offset-3 centered">
-                <form ng-submit="register()">
+                <div ng-show="registerFailure.exists" class="alert alert-danger fade in">
+                    This email is already in use. Please choose another.
+                </div>
+                <div ng-show="registerFailure.passMatch" class="alert alert-danger fade in">
+                    Passwords don't match.
+                </div>
+                <form ng-submit="register()" name="reisterForm.$invalid">
                     <fieldset class="form-group">
                         <label for="email">Email:</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="dubs@uw.edu" ng-model="infoRegister.email">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="dubs@uw.edu" ng-model="infoRegister.email" required>
                     </fieldset>
                     <fieldset class="form-group">
                         <label for="password">Password:</label>
-                        <input type="password" class="form-control" id="password" name="password" ng-model="infoRegister.password">
+                        <input type="password" class="form-control" id="password" name="password" ng-model="infoRegister.password" ng-minlength="5" ng-maxlength="20" required>
                     </fieldset>
                     <fieldset class="form-group">
                         <label for="password-confirmation">Confirm Password:</label>
-                        <input type="password" class="form-control" id="password-confirmation" name="passwordConfirmation">
+                        <input type="password" class="form-control" id="password-confirmation" name="passwordConfirmation" ng-model="infoRegister.newPass" ng-minlength="5" ng-maxlength="20" required>
                     </fieldset>
                     <fieldset class="form-group">
                         <label for="display-name">Display Name:</label>
-                        <input type="text" class="form-control" id="display-name" name="name" placeholder="dawgpack123" ng-model="infoRegister.name">
+                        <input type="text" class="form-control" id="display-name" name="name" placeholder="dawgpack123" ng-model="infoRegister.name" ng-minlength="3" required>
                     </fieldset>
                     <button type="submit" ng-disabled="registerForm.$invalid" class="btn btn-success" id="registerButton">Register</button>
                 </form>

@@ -110,7 +110,6 @@ var bcrypt = require('bcrypt-nodejs')
                 });
             });
         
-        
         // route to handle deleting users goes in app.delete
         
         // frontend routes =================

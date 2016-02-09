@@ -3,11 +3,11 @@ angular.module('UserCtrl', []).controller('UserController', function($scope, $ht
    
    // CAPTURES USER INPUT
    $scope.infoLogin = {email: '', password: ''};
-   $scope.infoRegister = {email: '', password: '', name: ''};
+   $scope.infoRegister = {email: '', password: '', newPass: '', name: ''};
    
    // ERROR FLAGS (set to true to trigger front side error message)
    $scope.loginFailure = false;
-   $scope.registerFailure
+   $scope.registerFailure = {exists: false, passMatch: false}
    $scope.notCurrentPassword = false;
    $scope.passwordsDontMatch = false;
    $scope.success = false;
@@ -38,20 +38,25 @@ angular.module('UserCtrl', []).controller('UserController', function($scope, $ht
    };
    
    $scope.register = function() {
-       $http.post('/newUser', $scope.infoRegister)
-        .then(function(results) {
+       if ($scope.infoRegister.password != $scope.infoRegister.newPass) {
+           $scope.registerFailure.passMatch = true;
+       } else {
+        $http.post('/newUser', $scope.infoRegister)
+            .then(function(results) {
             // if the passport authentication was successful
             if( results.data.message == 'success' ) {
                 var user = results.data.user.local;
-                var user_id = user._id
+                var user_id = results.data.user._id;
                 // set cookies for user info persistence
                 $cookies.putObject('user', user);
                 $cookies.put('id', user_id);
                 $state.go('homepage', {});
             } else {
-                console.log(results.data.message);
+                $scope.registerFailure.passMatch = false; // removes the password error message
+                $scope.registerFailure.exists = true; // shows the 'user exists' error message
             }
         });
+       }
    };
    
 

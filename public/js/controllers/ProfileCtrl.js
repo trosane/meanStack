@@ -44,5 +44,4 @@ angular.module('ProfileCtrl', []).controller('ProfileController', function($scop
                 $state.go('home', {});
             });
     };
-   
 });
