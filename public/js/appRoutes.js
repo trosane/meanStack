@@ -26,13 +26,14 @@ angular.module('appRoutes', ['ui.router']).config(function($stateProvider, $urlR
         .state('homepage', {
            url: '/homepage',
            templateUrl : 'views/homepage.html',
-           controller: 'UserController'
+           controller: 'ProfileController',
+           params: {'user' : null, 'id' : null}
         })
         
         .state('profile', {
             url:'/profile',
             templateUrl : 'views/profile.html',
-            controller : 'UserController'
+            controller : 'ProfileController'
         })
         
         

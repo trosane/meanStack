@@ -23,7 +23,6 @@ require('./config/passport')(passport);
 
 // get all data from the POST body parameters
 app.use(bodyParser.json());
-app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(morgan('dev'));

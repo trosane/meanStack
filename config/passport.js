@@ -31,7 +31,6 @@ module.exports = function(passport) {
         //asynchronous
         process.nextTick(function() {
             User.findOne({ 'local.email' : email }, function(err, user) {
-                console.log(user);
                 if (err)
                     return done(err);
                     

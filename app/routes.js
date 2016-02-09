@@ -6,39 +6,40 @@ var bcrypt = require('bcrypt-nodejs')
         // backend routes =================
         
         // LOCAL AUTHENTICATION FOR REGISTERING A NEW USER
-        app.post('/newUser', passport.authenticate('local-register', {
-            successRedirect : '/success#/homepage',
-            failureRedirect : '/register',
-        }));
+        app.post('/newUser', function(req, res, next) {
+            passport.authenticate('local-register', function(error, user, info) {
+                if(error)
+                    return res.json({ message : error });
+                if(!user)
+                    return res.json({ message : 'user already exists' });
+                res.json({ message : 'success', user : user});
+            }) (req, res, next);
+        });
         
         // LOCAL AUTHENTICATION FOR LOGGING IN
-        app.post('/user/login', passport.authenticate('local-login', {
-            successRedirect : '/success#/homepage',
-            failureRedirect : '/login',
-        }));
+        app.post('/user/login', function(req, res, next) {
+            passport.authenticate('local-login', function(error, user, info) {
+                if(error)
+                    return res.json({ message : 'error' });
+                if(!user)
+                    return res.json({ message : 'no user'});
+                res.json({ message : 'success', user : user });
+            }) (req, res, next);
+        });
         
         // FACEBOOK AUTHENTICATION FOR LOGGING IN
-        
         // route for facebook authentication and login
         app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email'}));
         // deals with the callback after facebook has finished authenticating the user
         app.get('/auth/facebook/callback', passport.authenticate('facebook', {
-            successRedirect : '/success#/homepage',
+            successRedirect : '/#/homepage',
             failureRedirect : '/login'
         }));
-        
-        // app.get('/login', function(req, res) {
-        //     res.sendfile('./public/views/login.html');
-        // });
-        
-        // app.get('/register', function(req, res) {
-        //      res.sendfile('./public/views/register.html');
-        //  })
         
         // route for logging out
         app.get('/logout', function(req, res) {
             req.logout();
-            res.redirect('/');
+            res.json( { message : 'logged out'} );
         });
         
         //===================================
@@ -76,7 +77,7 @@ var bcrypt = require('bcrypt-nodejs')
                         if (err)
                             res.send(err);
                             
-                        res.json({ message: 'User updated'});
+                        res.json({ message: 'success', user : user.local});
                     });
                 });
             });
@@ -91,7 +92,7 @@ var bcrypt = require('bcrypt-nodejs')
                     
                     if (!user.validPassword(oldPassword)) {
                         console.log('that isn\'t you current password!');
-                        res.send ('no');
+                        res.send ('password match failure');
                     } else {
                         console.log('way to put in your current password!');
                         var newPassword = req.body.newPass;
@@ -110,11 +111,6 @@ var bcrypt = require('bcrypt-nodejs')
             });
         
         
-        
-        app.get('/getData', function(req, res) {
-            res.json(req.user); 
-        });
-        
         // route to handle deleting users goes in app.delete
         
         // frontend routes =================
@@ -124,12 +120,18 @@ var bcrypt = require('bcrypt-nodejs')
             res.sendfile('./public/views/index.html');
         });
         
-    };
-    
-    //route middleware to ensure a user is logged in
-    function isLoggedIn(req, res, next) {
-        return next(); //if logged in, keep going
+        // app.get('/homepage', isLoggedIn, function(req, res, next) {
+        //     return next();
+        // });
         
-    // if they are not, redirect them to the home page
-    res.redirect('/');
-    }
+        // //route middleware to ensure a user is logged in
+        // function isLoggedIn(req, res, next) {
+        //     if(req.user) {
+        //         next(); //if logged in, keep going
+        //     } else {
+        //         // if they are not, redirect them to the home page
+        // res.redirect('/');
+        //     }
+        // };
+        
+    };

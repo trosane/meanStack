@@ -15,12 +15,15 @@
     
     <div class="container">
         <div class="col-sm-6 centered">
-            <p>Email: {{ user.email }}</p>
+            <p>Email: {{ user.user.email }}</p>
             <a class="btn btn-info" ui-sref="homepage">Go to Homepage</a>
         </div>
             <div class="col-sm-6 centered">
-                <div ng-show="error" class="alert alert-danger fade in">
+                <div ng-show="notCurrentPassword" class="alert alert-danger fade in">
                     That isn't your current password! Please make sure to type your password correctly.
+                </div>
+                <div ng-show="passwordsDontMatch" class="alert alert-danger fade in">
+                    Your passwords don't match!
                 </div>
                 <div ng-show="success" class="alert alert-success fade in">
                     Password changed successfully!
@@ -36,11 +39,12 @@
                     </fieldset>
                     <fieldset class="form-group">
                         <label for="password">Confirm New Password</label>
-                        <input type="password" class="form-control" id="newPasswordConf" name="newPasswordConf">
+                        <input type="password" class="form-control" id="newPasswordConf" name="newPasswordConf" ng-model="infoPass.newPassConf">
                     </fieldset>
                     <button type="submit" class="btn btn-success" id="nameChangeButton">Change</button>
                 </form>
                 {{infoPass}}
+                <button ng-click="test()">Test</button>
             </div>
     </div>
 </div>

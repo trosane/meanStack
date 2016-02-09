@@ -5,17 +5,19 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-6 col-sm-offset-3 centered">
-                <form action="/user/login" method="POST" name="loginForm">
+                <!--<form action="/user/login" method="POST" name="loginForm">-->
+                <form ng-submit="login()">
                     <fieldset class="form-group">
                         <label for="email">Email:</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="dubs@uw.edu" ng-model="formData.email">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="dubs@uw.edu" ng-model="infoLogin.email">
                     </fieldset>
                     <fieldset class="form-group">
                         <label for="password">Password:</label>
-                        <input type="password" class="form-control" id="password" name="password" ng-model="formData.password">
+                        <input type="password" class="form-control" id="password" name="password" ng-model="infoLogin.password">
                     </fieldset>
-                    <button type="submit" class="btn btn-success" id="loginButton" ng-disabled="loginForm.$invalid">Login</button>
+                    <button type="submit" class="btn btn-success" id="loginButton">Login</button>
                 </form>
+                {{ infoLogin }}
             </div>
         </div>
         <div class="row">

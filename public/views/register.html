@@ -5,25 +5,26 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-6 col-sm-offset-3 centered">
-                <form action="/newUser" method="POST" name="registerForm">
+                <form ng-submit="register()">
                     <fieldset class="form-group">
                         <label for="email">Email:</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="dubs@uw.edu" required>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="dubs@uw.edu" ng-model="infoRegister.email">
                     </fieldset>
                     <fieldset class="form-group">
                         <label for="password">Password:</label>
-                        <input type="password" class="form-control" id="password" name="password" required>
+                        <input type="password" class="form-control" id="password" name="password" ng-model="infoRegister.password">
                     </fieldset>
                     <fieldset class="form-group">
                         <label for="password-confirmation">Confirm Password:</label>
-                        <input type="password" class="form-control" id="password-confirmation" name="passwordConfirmation" required>
+                        <input type="password" class="form-control" id="password-confirmation" name="passwordConfirmation">
                     </fieldset>
                     <fieldset class="form-group">
                         <label for="display-name">Display Name:</label>
-                        <input type="text" class="form-control" id="display-name" name="name" placeholder="dawgpack123" required>
+                        <input type="text" class="form-control" id="display-name" name="name" placeholder="dawgpack123" ng-model="infoRegister.name">
                     </fieldset>
                     <button type="submit" ng-disabled="registerForm.$invalid" class="btn btn-success" id="registerButton">Register</button>
                 </form>
+                {{ infoRegister }}
             </div>
         </div>
     </div>
