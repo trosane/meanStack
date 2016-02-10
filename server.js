@@ -40,23 +40,25 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+
+
 app.use(express.static(__dirname + '/public'));
 
 // function isLoggedIn(req, res, next) {
-//     if(req.user) {
+//     if(req.isAuthenticated()) {
 //         next(); //if logged in, keep going
 //     } else {
 //         // if they are not, redirect them to the home page
-//     res.redirect('/');
+//         res.redirect('/');
 //     }
 // };
 
+// app.use(isLoggedIn());
 
-// app.use(express.static(__dirname + '/secure'));
+app.use(express.static(__dirname + '/secure'));
 
 require('./app/routes')(app, passport); // configure routes
 
-// app.use(express.static(__dirname + '/secure'));
 
 app.listen(80, function() {
     console.log('server is running on port 80...');

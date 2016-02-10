@@ -1,6 +1,6 @@
 angular.module('appRoutes', ['ui.router']).config(function($stateProvider, $urlRouterProvider) {
     
-    $urlRouterProvider.otherwise('/home');
+    $urlRouterProvider.otherwise('home');
     
     $stateProvider
         //home page
@@ -27,7 +27,7 @@ angular.module('appRoutes', ['ui.router']).config(function($stateProvider, $urlR
         // homepage after logging in
         .state('homepage', {
            url: '/homepage',
-           templateUrl : 'views/homepage.html',
+           templateUrl : '/homepage.html',
            controller: 'ProfileController',
            params: {'user' : null, 'id' : null}
         })
@@ -35,7 +35,7 @@ angular.module('appRoutes', ['ui.router']).config(function($stateProvider, $urlR
         // profile page after loggin in
         .state('profile', {
             url:'/profile',
-            templateUrl : 'views/profile.html',
+            templateUrl : '/profile.html',
             controller : 'ProfileController'
         })
         

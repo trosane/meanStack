@@ -6,6 +6,11 @@ angular.module('ProfileCtrl', []).controller('ProfileController', function($scop
     //     $scope.message = 'Your email Hash is: ' + md5.createHash($scope.gravEmail || '');
     // })
     
+   // ERROR FLAGS FOR PROFILE CHANGES
+   $scope.notCurrentPassword = false; //determines is password is the current password
+   $scope.passwordsDontMatch = false; //determines if the passwords match or not
+   $scope.success = false;
+    
    $scope.infoName = {name: ''};
    $scope.infoPass = {oldPass: '', newPass: '', newPassConf: ''};
     
@@ -22,6 +27,7 @@ angular.module('ProfileCtrl', []).controller('ProfileController', function($scop
     $scope.changePass = function() {
         if ($scope.infoPass.newPass != $scope.infoPass.newPassConf) {
             $scope.passwordsDontMatch = true;
+            $scope.notCurrentPassword = false;
         } else {
             $scope.passwordsDontMatch = false;
             $http.put('/oneUser/password/' + $scope.user_id, $scope.infoPass)
@@ -30,6 +36,7 @@ angular.module('ProfileCtrl', []).controller('ProfileController', function($scop
                 if(results.data == 'password match failure') {
                     $scope.notCurrentPassword = true;
                 } else {
+                    $scope.notCurrentPassword = false;
                     $scope.success = true;
                 }
             });

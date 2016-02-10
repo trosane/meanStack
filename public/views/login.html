@@ -8,16 +8,16 @@
                 <div ng-show="loginFailure" class="alert alert-danger fade in">
                     Username or password is incorrect. Please try again.
                 </div>
-                <form ng-submit="login()">
+                <form ng-submit="login()" name="loginForm">
                     <fieldset class="form-group">
                         <label for="email">Email:</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="dubs@uw.edu" ng-model="infoLogin.email">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="dubs@uw.edu" ng-model="infoLogin.email" required>
                     </fieldset>
                     <fieldset class="form-group">
                         <label for="password">Password:</label>
-                        <input type="password" class="form-control" id="password" name="password" ng-model="infoLogin.password">
+                        <input type="password" class="form-control" id="password" name="password" ng-model="infoLogin.password" required>
                     </fieldset>
-                    <button type="submit" class="btn btn-success" id="loginButton">Login</button>
+                    <button type="submit" ng-disabled="loginForm.$invalid" class="btn btn-success" id="loginButton">Login</button>
                 </form>
                 {{ infoLogin }}
             </div>

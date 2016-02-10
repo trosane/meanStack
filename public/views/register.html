@@ -11,22 +11,25 @@
                 <div ng-show="registerFailure.passMatch" class="alert alert-danger fade in">
                     Passwords don't match.
                 </div>
-                <form ng-submit="register()" name="reisterForm.$invalid">
+                <form ng-submit="register()" name="registerForm">
                     <fieldset class="form-group">
                         <label for="email">Email:</label>
                         <input type="email" class="form-control" id="email" name="email" placeholder="dubs@uw.edu" ng-model="infoRegister.email" required>
                     </fieldset>
                     <fieldset class="form-group">
                         <label for="password">Password:</label>
-                        <input type="password" class="form-control" id="password" name="password" ng-model="infoRegister.password" ng-minlength="5" ng-maxlength="20" required>
+                        <input type="password" class="form-control" id="password" name="password" ng-model="infoRegister.password" ng-minlength="5" required>
+                        <span class="error" ng-show="registerForm.password.$error.minlength">Password must be 5 characters.</span>
                     </fieldset>
                     <fieldset class="form-group">
                         <label for="password-confirmation">Confirm Password:</label>
-                        <input type="password" class="form-control" id="password-confirmation" name="passwordConfirmation" ng-model="infoRegister.newPass" ng-minlength="5" ng-maxlength="20" required>
+                        <input type="password" class="form-control" id="password-confirmation" name="passwordConfirmation" ng-model="infoRegister.newPass" ng-minlength="5" required>
+                        <span class="error" ng-show="registerForm.passwordConfirmation.$error.minlength">Password must be 5 characters long.</span>
                     </fieldset>
                     <fieldset class="form-group">
                         <label for="display-name">Display Name:</label>
                         <input type="text" class="form-control" id="display-name" name="name" placeholder="dawgpack123" ng-model="infoRegister.name" ng-minlength="3" required>
+                        <span class="error" ng-show="registerForm.name.$error.minlength">Username must be 3 characters long.</span>
                     </fieldset>
                     <button type="submit" ng-disabled="registerForm.$invalid" class="btn btn-success" id="registerButton">Register</button>
                 </form>

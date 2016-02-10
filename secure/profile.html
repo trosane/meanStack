@@ -28,20 +28,22 @@
                 <div ng-show="success" class="alert alert-success fade in">
                     Password changed successfully!
                 </div>
-                <form ng-submit="changePass()">
+                <form ng-submit="changePass()" name="passChangeForm">
                     <fieldset class="form-group">
                         <label for="password">Current Password</label>
-                        <input type="password" class="form-control" id="oldPassword" name="oldPassword" ng-model="infoPass.oldPass">
+                        <input type="password" class="form-control" id="oldPassword" name="oldPassword" ng-model="infoPass.oldPass" required>
                     </fieldset>
                     <fieldset class="form-group">
                         <label for="password">New Password</label>
-                        <input type="password" class="form-control" id="newPassword" name="newPassword" ng-model="infoPass.newPass">
+                        <input type="password" class="form-control" id="newPassword" name="newPassword" ng-model="infoPass.newPass" ng-minlength="5" required>
+                        <span class="error" ng-show="passChangeForm.newPassword.$error.minlength">Password must be 5 characters.</span>
                     </fieldset>
                     <fieldset class="form-group">
                         <label for="password">Confirm New Password</label>
-                        <input type="password" class="form-control" id="newPasswordConf" name="newPasswordConf" ng-model="infoPass.newPassConf">
+                        <input type="password" class="form-control" id="newPasswordConf" name="newPasswordConf" ng-model="infoPass.newPassConf" ng-minlength="5" required>
+                        <span class="error" ng-show="passChangeForm.newPasswordConf.$error.minlength">Password must be 5 characters.</span>
                     </fieldset>
-                    <button type="submit" class="btn btn-success" id="nameChangeButton">Change</button>
+                    <button type="submit" ng-disabled="passChangeForm.$invalid" class="btn btn-success" id="nameChangeButton">Change</button>
                 </form>
                 {{ infoPass }}
             </div>

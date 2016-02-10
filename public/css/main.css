@@ -1,7 +1,11 @@
 @import url(https://fonts.googleapis.com/css?family=Aldrich);
 
-body{
+body {
     font-family: 'Aldrich', sans-serif;
+}
+
+.error {
+    color : red;
 }
 
 .btn-primary.raised {

@@ -5,12 +5,9 @@ angular.module('UserCtrl', []).controller('UserController', function($scope, $ht
    $scope.infoLogin = {email: '', password: ''};
    $scope.infoRegister = {email: '', password: '', newPass: '', name: ''};
    
-   // ERROR FLAGS (set to true to trigger front side error message)
+   // ERROR FLAGS FOR LOGIN AND REGISTER (set to true to trigger front side error message)
    $scope.loginFailure = false;
    $scope.registerFailure = {exists: false, passMatch: false}
-   $scope.notCurrentPassword = false;
-   $scope.passwordsDontMatch = false;
-   $scope.success = false;
    
    //LOGIN FUNCTION
    $scope.login = function() {
@@ -38,6 +35,7 @@ angular.module('UserCtrl', []).controller('UserController', function($scope, $ht
    };
    
    $scope.register = function() {
+       $scope.infoRegister.exists = false;
        if ($scope.infoRegister.password != $scope.infoRegister.newPass) {
            $scope.registerFailure.passMatch = true;
        } else {
